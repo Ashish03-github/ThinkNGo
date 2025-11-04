@@ -1,28 +1,29 @@
 const colors = {
     light: {
-        primary: "#1F75EC",
-        primaryLight: "#EDF6FF",
-        background: "#FFFFFF",
+        primary: { backgroundColor: "#1F75EC" },
+        primaryLight: { backgroundColor: "#EDF6FF" },
+        background: { backgroundColor: "#FFFFFF" },
 
-        textPrimary: "#000000",
-        textSecondary: "#7C7E80",
+        textPrimary: { color: "#000000" },
+        textSecondary: { color: "#7C7E80" },
 
-
-        red: "#D64252",
-        lightRed: "#DB566A24",
-        white: "#FFFFFF"
+        red: { backgroundColor: "#D64252" },
+        lightRed: { backgroundColor: "#DB566A24" },
+        white: { backgroundColor: "#FFFFFF" },
     },
     dark: {
-        primary: "#1F75EC",
-        primaryLight: "#EDF6FF",
-        background: "#FFFFFF",
+        primary: { backgroundColor: "#1F75EC" },
+        primaryLight: { backgroundColor: "#EDF6FF" },
+        background: { backgroundColor: "#FFFFFF" },
 
-        textPrimary: "#000000",
-        textSecondary: "#7C7E80",
+        textPrimary: { color: "#000000" },
+        textSecondary: { color: "#7C7E80" },
 
+        red: { backgroundColor: "#D64252" },
+        lightRed: { backgroundColor: "#DB566A24" },
+        white: { backgroundColor: "#FFFFFF" },
+    },
+} as const;
 
-        red: "#D64252",
-        lightRed: "#DB566A24",
-        white: "#FFFFFF"
-    }
-}
+export type ThemeColors = typeof colors;
+export default colors;
