@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { Button } from './common';
+import { Button } from './common/components';
 import { RootTheme } from './theme';
 import useTheme from './common/hooks/useTheme';
 const App = () => {
@@ -12,7 +12,8 @@ const App = () => {
   );
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Ashish Yadav</Text>
+      <Button title="Button 1" />
+      <Button isBordered />
     </View>
   );
 };
@@ -20,9 +21,10 @@ const App = () => {
 const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
   StyleSheet.create({
     container: {
+      ...Spacing.p4,
       ...Layout.flex,
       ...Layout.center,
-      ...Colors.primaryLight,
+      ...Colors.white,
     },
     heading: {
       ...Fonts.sz20,
