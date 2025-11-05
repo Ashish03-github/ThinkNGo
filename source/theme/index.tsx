@@ -9,7 +9,7 @@ export { default as spacing } from './spacing';
 export { default as fonts } from './fonts';
 
 export type RootTheme = {
-  Colors: ThemeColors['light'];
+  Colors: ThemeColors['light' | 'dark'];
   Fonts: ThemeFonts;
   Layout: ThemeLayout;
   Spacing: ThemeSpacing;
