@@ -9,13 +9,16 @@ const colors = {
         white: { backgroundColor: "#FFFFFF" },
 
         // Text Colors
-        textPrimary: { color: "#000000" },
+        textPrimary: { color: "#1F75EC" },
         textSecondary: { color: "#7C7E80" },
+        textBlack: { color: "#000000" },
         textWhite: { color: "#FFFFFF" },
+        inputFiledTextColor: { color: "#757474" },
 
 
         // Simple Colors
-        primaryPure: "#1F75EC"
+        primaryPure: "#1F75EC",
+        lightGray: "#AEACAC",
 
     },
     dark: {
@@ -31,10 +34,15 @@ const colors = {
         // Text Colors
         textPrimary: { color: "#000000" },
         textSecondary: { color: "#7C7E80" },
+        textBlack: { color: "#000000" },
         textWhite: { color: "#FFFFFF" },
+        inputFiledTextColor: {
+            color: "#757474"
+        },
 
         // Simple Colors
-        primaryPure: "#1F75EC"
+        primaryPure: "#1F75EC",
+        lightGray: "#AEACAC",
     },
 } as const;
 

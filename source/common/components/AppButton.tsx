@@ -88,7 +88,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       borderColor: Colors.primaryPure,
     },
     titleStyle: {
-      ...Fonts.sz12,
+      ...Fonts.sz14,
       ...Fonts.font500,
       ...Colors.textWhite,
     },

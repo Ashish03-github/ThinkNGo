@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { Button } from './common/components';
+import { Button, Input } from './common/components';
 import { RootTheme } from './theme';
 import useTheme from './common/hooks/useTheme';
 const App = () => {
@@ -12,6 +12,12 @@ const App = () => {
   );
   return (
     <View style={styles.container}>
+      <Input placeholder="Name" />
+      <Input placeholder="Email" />
+      <Input isPhone={true} placeholder="Mobile Number" />
+      <Input placeholder="Date Of Birth" />
+      <Input isDropdown={true} placeholder="Blood Group" />
+
       <Button title="Button 1" />
       <Button isBordered />
     </View>
