@@ -50,10 +50,7 @@ const AppButton: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={[
-        isBordered ? styles.borderedContainer : styles.container,
-        style,
-      ]}
+      style={[isBordered ? styles.borderedContainer : styles.container, style]}
       {...touchableProps}
     >
       <View style={{ ...Layout.flexRow, ...Layout.center }}>
@@ -78,7 +75,8 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
   StyleSheet.create({
     container: {
       ...Layout.wFull,
-      ...Spacing.py3,
+      // ...Spacing.py3,
+      minHeight: scale(50),
       ...Colors.primary,
       ...Layout.center,
       ...Spacing.my1,
@@ -86,7 +84,8 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     borderedContainer: {
       ...Layout.wFull,
-      ...Spacing.py3,
+      // ...Spacing.py3,
+      minHeight: scale(50),
       ...Layout.center,
       ...Colors.white,
       ...Spacing.my1,

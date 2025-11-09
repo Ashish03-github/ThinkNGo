@@ -1,6 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { Button, Content, FormInput, Input } from './common/components';
+import {
+  Button,
+  Content,
+  FormInput,
+  GenderComponent,
+  Input,
+  SvgIcon,
+} from './common/components';
 import { RootTheme } from './theme';
 import useTheme from './common/hooks/useTheme';
 const App = () => {
@@ -13,39 +20,16 @@ const App = () => {
 
   return (
     <Content
-      isPreAuth={false}
       withButton
-      screenHeading="Edit Profile"
-      // shouldShowBottomSheet
-      // bottomSheetTriggerLabel="Review in Bottom Sheet"
-      // bottomSheetSnapPoint="60%"
-      // bottomSheetContent={({ close }) => (
-      //   <View style={styles.sheetContent}>
-      //     <Text style={styles.sheetTitle}>Changes ready to save?</Text>
-      //     <Text style={styles.sheetDescription}>
-      //       Review your updates and confirm. You can always come back and tweak
-      //       things later.
-      //     </Text>
-      //     <View style={styles.sheetActions}>
-      //       <Button onPress={close} title="Dismiss" />
-      //       <Button
-      //         onPress={() => {
-      //           console.log('Primary action triggered');
-      //           close();
-      //         }}
-      //         title="Save & Continue"
-      //       />
-      //     </View>
-      //   </View>
-      // )}
+      screenHeading="Create Account"
+      screenSubHeading="Please fill all the details given below"
     >
-      <FormInput label="Allergies" placeholder="Please add allergies" />
-      <FormInput label="Allergies" placeholder="Please add allergies" />
-      <FormInput label="Allergies" placeholder="Please add allergies" />
-      <FormInput label="Allergies" placeholder="Please add allergies" />
-      <FormInput label="Allergies" placeholder="Please add allergies" />
-      <FormInput label="Allergies" placeholder="Please add allergies" />
-      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <Input placeholder="Name" />
+      <Input placeholder="Email" />
+      <Input isPhone placeholder="Mobile Number" />
+      <Input placeholder="Date of Birth" />
+      <Input isDropdown placeholder="Blood Group" />
+      <GenderComponent />
     </Content>
   );
 };

@@ -6,8 +6,8 @@ export type IconNames = keyof typeof IconList;
 
 type SvgIconProps = {
   name: IconNames;
-  width?: string;
-  height?: string;
+  width?: number;
+  height?: number;
   color?: string;
 };
 

@@ -53,8 +53,8 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
   StyleSheet.create({
     container: {
       ...Spacing.pl4,
-      ...Spacing.my2,
-      height: scale(50),
+      ...Spacing.my3,
+      height: scale(55),
       ...Layout.roundedLg,
       ...Layout.fullWidth,
       borderWidth: scale(1),

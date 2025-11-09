@@ -37,7 +37,7 @@ const AppContent: React.FC<AppContentProps> = ({
   children,
   withButton,
   screenHeading,
-  isPreAuth = true,
+  isPreAuth = false,
   screenSubHeading,
   shouldShowBottomSheet,
   bottomSheetTriggerLabel,
@@ -137,7 +137,6 @@ const AppContent: React.FC<AppContentProps> = ({
       {isPreAuth ? (
         <View style={styles.screenHeadingContainer}>
           <Text type="subtitle" weight="semiBold">
-            {' '}
             {screenHeading}{' '}
           </Text>
           <Text type="regular">{screenSubHeading}</Text>
@@ -202,7 +201,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     headerContainer: {
       ...Spacing.px4,
-      // ...Spacing.p5,
+      ...Spacing.py6,
       ...Spacing.pb3,
       ...Layout.flexRow,
       ...Layout.alignCenter,
@@ -215,7 +214,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     screenHeadingContainer: {
       ...Layout.justifyCenter,
-      ...Spacing.py2,
+      ...Spacing.py5,
       // ...Spacing.mb4,
       // backgroundColor: 'yellow',
     },
@@ -223,7 +222,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Fonts.sz20,
       ...Fonts.font600,
       ...Colors.textBlack,
-      lineHeight: scaleVertical(36),
+      lineHeight: scaleVertical(40),
     },
     screenSubHeading: {
       ...Fonts.sz12,
@@ -232,10 +231,12 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     childrenContainer: {
       flex: 1,
+      ...Spacing.pt3,
       ...Colors.white,
     },
     buttonContainer: {
-      ...Layout.justifyEnd,
+      ...Layout.justifyStart,
+      ...Spacing.bottom2,
     },
     contentContainer: {
       flex: 1,

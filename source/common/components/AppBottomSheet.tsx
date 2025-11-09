@@ -89,12 +89,12 @@ const AppBottomSheet: React.FC<AppBottomSheetProps> = ({
   isVisible,
   onClose,
   children,
-  snapPoint = Math.round(Dimensions.get('window').height * 0.5),
-  enableBackdropDismiss = true,
-  animationDuration = DEFAULT_DURATION,
+  backdropStyle,
   containerStyle,
   contentContainerStyle,
-  backdropStyle,
+  enableBackdropDismiss = true,
+  animationDuration = DEFAULT_DURATION,
+  snapPoint = Math.round(Dimensions.get('window').height * 0.5),
 }) => {
   const { Colors, Layout, Spacing } = useTheme();
   const [shouldRender, setShouldRender] = useState(isVisible);
