@@ -9,18 +9,24 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { useTheme } from '../hooks';
 import { RootTheme } from '../../theme';
 import { scale, scaleVertical } from '../../theme/scale';
-import { Text } from '.';
+import { SvgIcon, Text } from '.';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import { SvgXml } from 'react-native-svg';
 
 interface AppFormInputProps extends TextInputProps {
   label: string;
-  type?: 'Personal-Details-Field' | 'Medical-Details-Field';
+  subLabel?: string;
+  type?:
+    | 'Personal-Details-Field'
+    | 'Medical-Details-Field'
+    | 'Family-Details-Field';
   placeholder: string;
 }
 
 const AppFormInput: React.FC<AppFormInputProps> = ({
   label,
-  type,
+  subLabel,
+  type = 'Family-Details-Field',
   placeholder,
   ...props
 }) => {
@@ -151,6 +157,33 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
     );
   }
 
+  if (type === 'Family-Details-Field') {
+    return (
+      <View style={styles.fContainer}>
+        <View style={styles.fImageIconContainer}>
+          <View style={styles.fTempIcon}>
+            <SvgIcon name="user_f" width={'80%'} height={'80%'} />
+          </View>
+        </View>
+        <View style={styles.fDetailsContainer}>
+          <Text type="regular" weight="medium" style={{ ...Colors.textBlack }}>
+            Thomas Miller
+          </Text>
+          <Text
+            type="caption"
+            weight="medium"
+            style={{ ...Colors.textPrimary }}
+          >
+            Father
+          </Text>
+        </View>
+        <View style={styles.fEditIconContainer}>
+          <Icon name="pencil" size={scale(14)} color={Colors.lightGrayPure} />
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.fieldContainer}>
@@ -174,7 +207,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Layout.flexRow,
       ...Layout.fullWidth,
       minHeight: scale(52),
-      borderBottomWidth: scale(0.8),
+      borderBottomWidth: scale(0.6),
       borderBottomColor: Colors.lightGrayPure,
     },
     fieldContainer: {
@@ -199,11 +232,13 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       flex: 0.1,
       ...Layout.center,
     },
+
+    //
     mContainer: {
       ...Spacing.my2,
       ...Layout.fullWidth,
       minHeight: scale(80),
-      borderBottomWidth: scale(0.8),
+      borderBottomWidth: scale(0.6),
       borderBottomColor: Colors.lightGrayPure,
     },
     mLableAndIconContainer: {
@@ -285,6 +320,40 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Spacing.py1,
       ...Colors.primary,
       ...Layout.rounded2xl,
+    },
+
+    // Family Field
+    fContainer: {
+      // ...Spacing.my2,
+      ...Layout.flexRow,
+      ...Layout.fullWidth,
+      minHeight: scale(80),
+      borderBottomWidth: scale(0.6),
+      borderBottomColor: Colors.lightGrayPure,
+    },
+    fImageIconContainer: {
+      flex: 0.2,
+      ...Layout.center,
+      // ...Colors.primary,
+    },
+    fTempIcon: {
+      width: scale(46),
+      height: scale(46),
+      borderRadius: scale(46),
+      // ...Spacing.pb1,
+      ...Layout.justifyEnd,
+      ...Layout.alignCenter,
+      ...Colors.primaryLight1,
+      overflow: 'hidden',
+    },
+
+    fDetailsContainer: {
+      flex: 0.7,
+      ...Layout.justifyCenter,
+    },
+    fEditIconContainer: {
+      flex: 0.1,
+      ...Layout.center,
     },
   });
 

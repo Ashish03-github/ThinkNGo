@@ -70,7 +70,7 @@ const AppContent: React.FC<AppContentProps> = ({
         <View style={styles.childrenContainer}>{children}</View>
 
         {withButton ? (
-          <View style={{ flex: 0.1, ...Layout.justifyEnd }}>
+          <View style={styles.buttonContainer}>
             <Button title="Save Changes" />
           </View>
         ) : null}
@@ -88,9 +88,10 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     headerContainer: {
       ...Spacing.px4,
       ...Spacing.p5,
+      ...Spacing.pb3,
       ...Layout.flexRow,
       ...Layout.alignCenter,
-      // backgroundColor: 'red',
+      // backgroundColor: 'pink',
     },
     scrollContainer: {
       flexGrow: 1,
@@ -116,9 +117,12 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     childrenContainer: {
       flex: 1,
-      ...Spacing.mt2,
+      // ...Spacing.mt2,
       ...Colors.white,
-      // backgroundColor: 'red',
+      // backgroundColor: 'yellow',
+    },
+    buttonContainer: {
+      ...Layout.justifyEnd,
     },
   });
 

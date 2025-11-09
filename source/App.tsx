@@ -12,36 +12,13 @@ const App = () => {
   );
   return (
     <Content isPreAuth={false} withButton screenHeading="Edit Profile">
-      <FormInput
-        label="Allergies"
-        type="Medical-Details-Field"
-        placeholder="Please add allergies"
-      />
-      <FormInput
-        label="Current Medication"
-        type="Medical-Details-Field"
-        placeholder="Please add current medication"
-      />
-      <FormInput
-        label="Past Medication"
-        type="Medical-Details-Field"
-        placeholder="Please add past medication"
-      />
-      <FormInput
-        label="Disease"
-        type="Medical-Details-Field"
-        placeholder="Please add diseases"
-      />
-      <FormInput
-        label="Injuries"
-        type="Medical-Details-Field"
-        placeholder="Please add injuries"
-      />
-      <FormInput
-        label="Surgeries"
-        type="Medical-Details-Field"
-        placeholder="Please add surgeries"
-      />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
+      <FormInput label="Allergies" placeholder="Please add allergies" />
     </Content>
   );
 };
