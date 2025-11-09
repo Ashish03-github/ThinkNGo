@@ -1,7 +1,8 @@
 const colors = {
     light: {
         primary: { backgroundColor: "#1F75EC" },
-        primaryLight: { backgroundColor: "#EDF6FF" },
+        primaryLight1: { backgroundColor: "#EDF6FF" },
+        primaryLight2: { backgroundColor: "#BCDFFF2E" },
         background: { backgroundColor: "#FFFFFF" },
 
         red: { backgroundColor: "#D64252" },
@@ -18,12 +19,16 @@ const colors = {
 
         // Simple Colors
         primaryPure: "#1F75EC",
-        lightGray: "#AEACAC",
+        lightGrayPure: "#AEACAC",
+        blackPure: "#000000",
+        whitePure: "#FFFFFF",
+        redPure: "#D64252",
 
     },
     dark: {
         primary: { backgroundColor: "#1F75EC" },
-        primaryLight: { backgroundColor: "#EDF6FF" },
+        primaryLight1: { backgroundColor: "#EDF6FF" },
+        primaryLight2: { backgroundColor: "#BCDFFF2E" },
         background: { backgroundColor: "#FFFFFF" },
 
         red: { backgroundColor: "#D64252" },
@@ -42,7 +47,10 @@ const colors = {
 
         // Simple Colors
         primaryPure: "#1F75EC",
-        lightGray: "#AEACAC",
+        lightGrayPure: "#AEACAC",
+        blackPure: "#000000",
+        whitePure: "#FFFFFF",
+        redPure: "#D64252",
     },
 } as const;
 

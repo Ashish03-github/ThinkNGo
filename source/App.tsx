@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { Button, Input } from './common/components';
+import { Button, Content, FormInput, Input } from './common/components';
 import { RootTheme } from './theme';
 import useTheme from './common/hooks/useTheme';
 const App = () => {
@@ -11,16 +11,38 @@ const App = () => {
     [Colors, Layout, Fonts, Spacing],
   );
   return (
-    <View style={styles.container}>
-      <Input placeholder="Name" />
-      <Input placeholder="Email" />
-      <Input isPhone={true} placeholder="Mobile Number" />
-      <Input placeholder="Date Of Birth" />
-      <Input isDropdown={true} placeholder="Blood Group" />
-
-      <Button title="Button 1" />
-      <Button isBordered />
-    </View>
+    <Content isPreAuth={false} screenHeading="Edit Profile">
+      <FormInput
+        label="Allergies"
+        type="Medical-Details-Field"
+        placeholder="Please add allergies"
+      />
+      <FormInput
+        label="Current Medication"
+        type="Medical-Details-Field"
+        placeholder="Please add current medication"
+      />
+      <FormInput
+        label="Past Medication"
+        type="Medical-Details-Field"
+        placeholder="Please add past medication"
+      />
+      <FormInput
+        label="Disease"
+        type="Medical-Details-Field"
+        placeholder="Please add diseases"
+      />
+      <FormInput
+        label="Injuries"
+        type="Medical-Details-Field"
+        placeholder="Please add injuries"
+      />
+      <FormInput
+        label="Surgeries"
+        type="Medical-Details-Field"
+        placeholder="Please add surgeries"
+      />
+    </Content>
   );
 };
 

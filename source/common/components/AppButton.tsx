@@ -75,7 +75,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Spacing.py3,
       ...Colors.primary,
       ...Layout.center,
-      ...Spacing.my4,
+      ...Spacing.my1,
       ...Layout.roundedLg,
     },
     borderedContainer: {
@@ -83,6 +83,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Spacing.py3,
       ...Layout.center,
       ...Colors.white,
+      ...Spacing.my1,
       ...Layout.roundedLg,
       borderWidth: scale(1),
       borderColor: Colors.primaryPure,
