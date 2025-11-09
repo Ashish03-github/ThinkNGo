@@ -11,7 +11,7 @@ const App = () => {
     [Colors, Layout, Fonts, Spacing],
   );
   return (
-    <Content isPreAuth={false} screenHeading="Edit Profile">
+    <Content isPreAuth={false} withButton screenHeading="Edit Profile">
       <FormInput
         label="Allergies"
         type="Medical-Details-Field"

@@ -28,6 +28,7 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
   const [isAdding, setIsAdding] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [addedItems, setAddedItems] = useState<string[]>([]);
+  const [isEditing, setIsEditing] = useState(false);
 
   const styles = useMemo(
     () => stylesFn({ Colors, Layout, Spacing, Fonts }),
@@ -43,6 +44,7 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
 
   const handleRemoveItem = useCallback((index: number) => {
     setAddedItems(prev => prev.filter((_, i) => i !== index));
+    setIsEditing(false);
   }, []);
 
   const shouldShowSelectedItems = addedItems.length > 0 || !isAdding;
@@ -55,7 +57,22 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
             {label}
           </Text>
           <View style={styles.iconsContainer}>
-            <Icon name="pencil" size={scale(12)} color={Colors.lightGrayPure} />
+            {isEditing && addedItems.length > 0 ? (
+              <Icon
+                name="check"
+                size={scale(14)}
+                color={Colors.pureGreen}
+                onPress={() => setIsEditing(false)}
+              />
+            ) : (
+              <Icon
+                name="pencil"
+                size={scale(12)}
+                color={Colors.lightGrayPure}
+                onPress={() => setIsEditing(true)}
+              />
+            )}
+
             <Icon
               name={isAdding ? 'xmark' : 'plus'}
               size={scale(16)}
@@ -84,17 +101,20 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
                   >
                     {item}
                   </Text>
-                  <TouchableOpacity
-                    onPress={() => handleRemoveItem(index)}
-                    activeOpacity={0.7}
-                    style={styles.removeItemIcon}
-                  >
-                    <Icon
-                      name="xmark"
-                      size={scale(10)}
-                      color={Colors.redPure}
-                    />
-                  </TouchableOpacity>
+
+                  {isEditing ? (
+                    <TouchableOpacity
+                      onPress={() => handleRemoveItem(index)}
+                      activeOpacity={0.7}
+                      style={styles.removeItemIcon}
+                    >
+                      <Icon
+                        name="xmark"
+                        size={scale(10)}
+                        color={Colors.redPure}
+                      />
+                    </TouchableOpacity>
+                  ) : null}
                 </View>
               ))}
             </View>

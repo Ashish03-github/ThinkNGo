@@ -69,7 +69,7 @@ const AppContent: React.FC<AppContentProps> = ({
 
         <View style={styles.childrenContainer}>{children}</View>
 
-        {true ? (
+        {withButton ? (
           <View style={{ flex: 0.1, ...Layout.justifyEnd }}>
             <Button title="Save Changes" />
           </View>
@@ -115,9 +115,9 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Colors.textSecondary,
     },
     childrenContainer: {
-      flex: 0.9,
+      flex: 1,
       ...Spacing.mt2,
-      ...Colors.background,
+      ...Colors.white,
       // backgroundColor: 'red',
     },
   });
