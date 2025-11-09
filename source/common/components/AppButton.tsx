@@ -2,23 +2,25 @@ import {
   View,
   Text,
   StyleSheet,
-  StyleProp,
   TouchableOpacity,
+  TouchableOpacityProps,
 } from 'react-native';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { RootTheme } from '../../theme';
 import useTheme from '../hooks/useTheme';
 import { scale } from '../../theme/scale';
 
-type ButtonProps = {
+interface ButtonProps extends TouchableOpacityProps {
   title?: string;
   icon?: string | React.JSX.Element;
   isBordered?: boolean;
-};
+}
 const AppButton: React.FC<ButtonProps> = ({
   isBordered = false,
   title = 'Continue',
   icon,
+  style,
+  ...touchableProps
 }) => {
   const { Colors, Fonts, Layout, Spacing } = useTheme();
   let styles = React.useMemo(
@@ -48,7 +50,11 @@ const AppButton: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      style={[isBordered ? styles.borderedContainer : styles.container]}
+      style={[
+        isBordered ? styles.borderedContainer : styles.container,
+        style,
+      ]}
+      {...touchableProps}
     >
       <View style={{ ...Layout.flexRow, ...Layout.center }}>
         {renderIcon()}

@@ -1,5 +1,11 @@
 import { View, StyleSheet, StatusBar } from 'react-native';
-import React, { ReactNode } from 'react';
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { scale, scaleVertical } from '../../theme/scale';
 import { RootTheme } from '../../theme';
 import { useTheme } from '../hooks';
@@ -7,6 +13,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button, Text } from '../components';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AppBottomSheet from './AppBottomSheet';
 
 type AppContentProps = {
   isPreAuth?: boolean;
@@ -14,6 +22,16 @@ type AppContentProps = {
   screenHeading: string;
   withButton?: boolean;
   screenSubHeading?: string;
+  shouldShowBottomSheet?: boolean;
+  bottomSheetTriggerLabel?: string;
+  bottomSheetContent?:
+    | ReactNode
+    | ((helpers: { close: () => void }) => ReactNode);
+  bottomSheetDefaultVisible?: boolean;
+  bottomSheetSnapPoint?: number | `${number}%`;
+  bottomSheetEnableBackdropDismiss?: boolean;
+  onBottomSheetOpen?: () => void;
+  onBottomSheetClose?: () => void;
 };
 const AppContent: React.FC<AppContentProps> = ({
   children,
@@ -21,61 +39,158 @@ const AppContent: React.FC<AppContentProps> = ({
   screenHeading,
   isPreAuth = true,
   screenSubHeading,
+  shouldShowBottomSheet,
+  bottomSheetTriggerLabel,
+  bottomSheetContent,
+  bottomSheetDefaultVisible,
+  bottomSheetSnapPoint,
+  bottomSheetEnableBackdropDismiss,
+  onBottomSheetOpen,
+  onBottomSheetClose,
 }) => {
   const { Colors, Fonts, Layout, Spacing } = useTheme();
-  let styles = React.useMemo(
+
+  const styles = useMemo(
     () => stylesFn({ Colors, Layout, Spacing, Fonts }),
     [Colors, Fonts, Layout, Spacing],
   );
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        translucent
-        barStyle={'dark-content'}
-        backgroundColor={Colors.whitePure}
-      />
+  const [isSheetVisible, setSheetVisible] = useState(
+    bottomSheetDefaultVisible ?? false,
+  );
 
-      {/* Header */}
-      <View style={styles.headerContainer}>
-        <Feather
-          name="arrow-left"
-          size={scale(25)}
-          color={Colors.blackPure}
-          style={{ ...Spacing.mr4 }}
-        />
-        {!isPreAuth ? (
+  const hasBottomSheetContent = Boolean(bottomSheetContent);
+
+  const derivedBottomSheetFlag =
+    typeof shouldShowBottomSheet === 'boolean'
+      ? shouldShowBottomSheet
+      : hasBottomSheetContent;
+  const canRenderBottomSheet = hasBottomSheetContent && derivedBottomSheetFlag;
+
+  useEffect(() => {
+    if (typeof bottomSheetDefaultVisible === 'boolean') {
+      setSheetVisible(bottomSheetDefaultVisible);
+    }
+  }, [bottomSheetDefaultVisible]);
+
+  useEffect(() => {
+    if (!canRenderBottomSheet) {
+      setSheetVisible(false);
+    }
+  }, [canRenderBottomSheet]);
+
+  const handlePresentModalPress = useCallback(() => {
+    if (!canRenderBottomSheet) {
+      return;
+    }
+    setSheetVisible(true);
+    onBottomSheetOpen?.();
+  }, [canRenderBottomSheet, onBottomSheetOpen]);
+
+  const handleCloseSheet = useCallback(() => {
+    setSheetVisible(false);
+    onBottomSheetClose?.();
+  }, [onBottomSheetClose]);
+
+  const renderBottomSheetContent = () => {
+    if (!bottomSheetContent) {
+      return (
+        <View style={styles.fallbackContent}>
           <Text type="subtitle" weight="semiBold">
-            {screenHeading}
+            Bottom sheet content not provided.
           </Text>
-        ) : null}
-      </View>
+          <Button onPress={handleCloseSheet} title="Close" />
+        </View>
+      );
+    }
 
-      <KeyboardAwareScrollView
-        enableOnAndroid
-        keyboardShouldPersistTaps="handled"
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-      >
-        {isPreAuth ? (
-          <View style={styles.screenHeadingContainer}>
-            <Text type="subtitle" weight="semiBold">
-              {' '}
-              {screenHeading}{' '}
-            </Text>
-            <Text type="regular">{screenSubHeading}</Text>
+    if (typeof bottomSheetContent === 'function') {
+      return bottomSheetContent({ close: handleCloseSheet });
+    }
+
+    return bottomSheetContent;
+  };
+
+  const HeaderComponent = () => (
+    <View style={styles.headerContainer}>
+      <Feather
+        name="arrow-left"
+        size={scale(25)}
+        color={Colors.blackPure}
+        style={{ ...Spacing.mr4 }}
+      />
+      {!isPreAuth ? (
+        <Text type="subtitle" weight="semiBold">
+          {screenHeading}
+        </Text>
+      ) : null}
+    </View>
+  );
+
+  const ChildComponent = () => (
+    <KeyboardAwareScrollView
+      enableOnAndroid
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.scrollContainer}
+    >
+      {isPreAuth ? (
+        <View style={styles.screenHeadingContainer}>
+          <Text type="subtitle" weight="semiBold">
+            {' '}
+            {screenHeading}{' '}
+          </Text>
+          <Text type="regular">{screenSubHeading}</Text>
+        </View>
+      ) : null}
+
+      <View style={styles.childrenContainer}>{children}</View>
+
+      {withButton ? (
+        <View style={styles.buttonContainer}>
+          <Button title="Save Changes" />
+        </View>
+      ) : null}
+      {canRenderBottomSheet ? (
+        <View style={styles.buttonContainer}>
+          <Button
+            onPress={handlePresentModalPress}
+            title={bottomSheetTriggerLabel ?? 'Show Details'}
+          />
+        </View>
+      ) : null}
+    </KeyboardAwareScrollView>
+  );
+
+  return (
+    <GestureHandlerRootView>
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          translucent
+          barStyle={'dark-content'}
+          backgroundColor={Colors.whitePure}
+        />
+
+        {/* Header */}
+        <HeaderComponent />
+
+        {/* Child */}
+        <ChildComponent />
+      </SafeAreaView>
+
+      {canRenderBottomSheet ? (
+        <AppBottomSheet
+          isVisible={isSheetVisible}
+          onClose={handleCloseSheet}
+          snapPoint={bottomSheetSnapPoint}
+          enableBackdropDismiss={bottomSheetEnableBackdropDismiss}
+        >
+          <View style={styles.contentContainer}>
+            {renderBottomSheetContent()}
           </View>
-        ) : null}
-
-        <View style={styles.childrenContainer}>{children}</View>
-
-        {withButton ? (
-          <View style={styles.buttonContainer}>
-            <Button title="Save Changes" />
-          </View>
-        ) : null}
-      </KeyboardAwareScrollView>
-    </SafeAreaView>
+        </AppBottomSheet>
+      ) : null}
+    </GestureHandlerRootView>
   );
 };
 
@@ -87,7 +202,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     headerContainer: {
       ...Spacing.px4,
-      ...Spacing.p5,
+      // ...Spacing.p5,
       ...Spacing.pb3,
       ...Layout.flexRow,
       ...Layout.alignCenter,
@@ -117,12 +232,21 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     childrenContainer: {
       flex: 1,
-      // ...Spacing.mt2,
       ...Colors.white,
-      // backgroundColor: 'yellow',
     },
     buttonContainer: {
       ...Layout.justifyEnd,
+    },
+    contentContainer: {
+      flex: 1,
+      ...Spacing.pt3,
+      ...Spacing.px2,
+      ...Layout.justifyBetween,
+    },
+    fallbackContent: {
+      ...Spacing.pl2,
+      ...Layout.flex,
+      ...Layout.justifyBetween,
     },
   });
 
