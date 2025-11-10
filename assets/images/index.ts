@@ -1,3 +1,6 @@
+import Pagination1 from '../../source/modules/Onboarding/assets/Pagination1';
+import Pagination2 from '../../source/modules/Onboarding/assets/Pagination2';
+import Pagination3 from '../../source/modules/Onboarding/assets/Pagination3';
 import Family from './Family';
 import Female from './Female';
 import Male from './Male'
@@ -10,6 +13,11 @@ export const IconList = {
     family: Family,
     female: Female,
     male: Male,
+
+    // Pagination
+    pagination1: Pagination1,
+    pagination2: Pagination2,
+    pagination3: Pagination3,
 } as const;
 
 
