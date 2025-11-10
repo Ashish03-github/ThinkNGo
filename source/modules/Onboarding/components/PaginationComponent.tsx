@@ -25,9 +25,9 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
 
   return (
     <View style={styles.container}>
-      <SvgIcon name={iconName} width={scale(280)} height={scale(280)} />
+      <SvgIcon name={iconName} width={scale(260)} height={scale(260)} />
 
-      <Text type="h5" weight="semiBold" style={styles.paginationTextStyle}>
+      <Text type="h4" weight="medium" style={styles.paginationTextStyle}>
         {text}
       </Text>
 

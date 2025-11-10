@@ -75,8 +75,8 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
   StyleSheet.create({
     container: {
       ...Layout.wFull,
-      ...Spacing.py3,
-      // minHeight: scale(50),
+      // ...Spacing.py3,
+      minHeight: scale(48),
       ...Colors.primary,
       ...Layout.center,
       ...Spacing.my1,
@@ -84,8 +84,8 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     borderedContainer: {
       ...Layout.wFull,
-      ...Spacing.py3,
-      // minHeight: scale(50),
+      // ...Spacing.py3,
+      minHeight: scale(48),
       ...Layout.center,
       ...Colors.white,
       ...Spacing.my1,
