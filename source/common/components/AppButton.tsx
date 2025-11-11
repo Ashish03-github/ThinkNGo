@@ -31,7 +31,8 @@ const AppButton: React.FC<ButtonProps> = ({
   const renderIcon = () => {
     if (!icon) return null;
 
-    if (React.isValidElement(icon)) return icon;
+    if (React.isValidElement(icon))
+      return <View style={{ ...Spacing.mr3 }}>{icon}</View>;
 
     // if (typeof icon === 'string') {
     //   return (

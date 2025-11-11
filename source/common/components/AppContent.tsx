@@ -19,9 +19,11 @@ import AppBottomSheet from './AppBottomSheet';
 type AppContentProps = {
   isPreAuth?: boolean;
   children?: ReactNode;
-  screenHeading: string;
+  headingType?: 'bold' | 'normal';
+  screenHeading?: string;
   withButton?: boolean;
   screenSubHeading?: string;
+  disableBackButton?: boolean;
   shouldShowBottomSheet?: boolean;
   bottomSheetTriggerLabel?: string;
   bottomSheetContent?:
@@ -37,8 +39,10 @@ const AppContent: React.FC<AppContentProps> = ({
   children,
   withButton,
   screenHeading,
+  headingType = 'normal',
   isPreAuth = false,
   screenSubHeading,
+  disableBackButton = false,
   shouldShowBottomSheet,
   bottomSheetTriggerLabel,
   bottomSheetContent,
@@ -113,12 +117,14 @@ const AppContent: React.FC<AppContentProps> = ({
 
   const HeaderComponent = () => (
     <View style={styles.headerContainer}>
-      <Feather
-        name="arrow-left"
-        size={scale(25)}
-        color={Colors.blackPure}
-        style={{ ...Spacing.mr4 }}
-      />
+      {!disableBackButton && (
+        <Feather
+          name="arrow-left"
+          size={scale(25)}
+          color={Colors.blackPure}
+          style={{ ...Spacing.mr4 }}
+        />
+      )}
       {!isPreAuth ? (
         <Text type="subtitle" weight="semiBold">
           {screenHeading}
@@ -136,10 +142,23 @@ const AppContent: React.FC<AppContentProps> = ({
     >
       {isPreAuth ? (
         <View style={styles.screenHeadingContainer}>
-          <Text type="subtitle" weight="semiBold">
-            {screenHeading}{' '}
-          </Text>
-          <Text type="regular">{screenSubHeading}</Text>
+          {headingType === 'bold' ? (
+            <>
+              <Text type="h3" weight="bold">
+                {screenHeading}{' '}
+              </Text>
+              <Text type="regular" style={{ lineHeight: scale(36) }}>
+                {screenSubHeading}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text type="subtitle" weight="semiBold">
+                {screenHeading}{' '}
+              </Text>
+              <Text type="regular">{screenSubHeading}</Text>
+            </>
+          )}
         </View>
       ) : null}
 
@@ -165,9 +184,8 @@ const AppContent: React.FC<AppContentProps> = ({
     <GestureHandlerRootView>
       <SafeAreaView style={styles.container}>
         <StatusBar
-          translucent
-          barStyle={'dark-content'}
           backgroundColor={Colors.whitePure}
+          barStyle={'dark-content'}
         />
 
         {/* Header */}

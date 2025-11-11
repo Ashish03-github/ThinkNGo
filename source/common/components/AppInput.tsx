@@ -12,6 +12,7 @@ import { scale, scaleVertical } from '../../theme/scale';
 import { RootTheme, spacing } from '../../theme';
 import { useTheme } from '../hooks';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { SvgIcon } from '.';
 
 interface InputProps extends TextInputProps {
   isPhone?: boolean;
@@ -31,6 +32,7 @@ const AppInput: FC<InputProps> = ({ isPhone, isDropdown, ...props }) => {
       <View style={styles.inputContainer}>
         {isPhone ? (
           <View style={styles.phoneCodeContainer}>
+            <SvgIcon name="flag" width={scale(20)} height={scale(20)} />
             <Text style={styles.mobileCodeText}>+ 91</Text>
           </View>
         ) : null}
@@ -76,16 +78,18 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     phoneCodeContainer: {
       ...Spacing.pr1,
       ...Spacing.mr1,
+      ...Layout.flexRow,
       ...Layout.center,
-      width: scale(35),
+      width: scale(60),
       borderRightWidth: scale(0.8),
-      height: scaleVertical(25),
+      height: scaleVertical(30),
       borderColor: Colors.lightGrayPure,
     },
     mobileCodeText: {
       ...Fonts.font400,
       ...Fonts.sz13,
       ...Colors.textPrimary,
+      ...Spacing.ml1,
     },
     dropdownIconContainer: {
       flex: 0.1,
