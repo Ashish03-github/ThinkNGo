@@ -4,8 +4,6 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 import React, { FC } from 'react';
 import { scale, scaleVertical } from '../../theme/scale';
@@ -25,10 +23,7 @@ const AppInput: FC<InputProps> = ({ isPhone, isDropdown, ...props }) => {
     [Colors, Fonts, Layout, Spacing],
   );
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         {isPhone ? (
           <View style={styles.phoneCodeContainer}>
@@ -47,7 +42,7 @@ const AppInput: FC<InputProps> = ({ isPhone, isDropdown, ...props }) => {
       <View style={styles.dropdownIconContainer}>
         {isDropdown ? <AntDesign name="down" size={scale(12)} /> : null}
       </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

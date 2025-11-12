@@ -135,10 +135,12 @@ const AppContent: React.FC<AppContentProps> = ({
 
   const ChildComponent = () => (
     <KeyboardAwareScrollView
-      enableOnAndroid
+      enableOnAndroid={true}
+      enableAutomaticScroll={true}
       keyboardShouldPersistTaps="handled"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.scrollContainer}
+      extraScrollHeight={scale(20)}
     >
       {isPreAuth ? (
         <View style={styles.screenHeadingContainer}>
@@ -228,7 +230,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     scrollContainer: {
       flexGrow: 1,
       ...Spacing.px4,
-      // ...Spacing.pb6,
+      paddingBottom: scaleVertical(20),
     },
     screenHeadingContainer: {
       ...Layout.justifyCenter,
@@ -248,7 +250,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Colors.textSecondary,
     },
     childrenContainer: {
-      flex: 1,
+      flexGrow: 1,
       ...Spacing.pt3,
       ...Colors.white,
     },

@@ -1,4 +1,8 @@
-import { View, StyleSheet, GestureResponderEvent } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  GestureResponderEvent,
+} from 'react-native';
 import React from 'react';
 import { RootTheme } from '../../../../theme';
 import { scale } from '../../../../theme/scale';
@@ -50,18 +54,9 @@ const LoginComponent: React.FC<LoginComponentProps> = ({
 
 const stylesFn = ({ Colors, Layout, Fonts, Spacing }: RootTheme) =>
   StyleSheet.create({
-    container: {
-      ...Layout.flex,
-    },
     loginContainer: {
-      flex: 0.5,
-      ...Layout.justifyCenter,
-    },
-    imageContainer: {
-      flex: 0.5,
-      ...Layout.justifyEnd,
-      marginHorizontal: scale(-16),
-      opacity: 0.3,
+      minHeight: scale(300),
+      ...Spacing.mt4,
     },
     privacyTextContainer: {
       ...Layout.flexRow,

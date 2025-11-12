@@ -11,33 +11,16 @@ const LoginBackgroundComponent = () => {
     () => stylesFn({ Colors, Layout, Fonts, Spacing }),
     [Colors, Layout],
   );
-  return (
-    <ImageBackground style={styles.imageContainer}>
-      <SvgIcon name="loginBackground" height={scaleVertical(300)} />
-    </ImageBackground>
-  );
+  return <SvgIcon name="loginBackground" height={scaleVertical(300)} />;
 };
 
 const stylesFn = ({ Colors, Layout, Fonts, Spacing }: RootTheme) =>
   StyleSheet.create({
-    container: {
-      ...Layout.flex,
-    },
-    loginContainer: {
-      flex: 0.5,
-      ...Layout.justifyCenter,
-      //   ...Colors.primary,
-    },
     imageContainer: {
-      flex: 0.5,
-      //   ...Colors.red,
       ...Layout.justifyEnd,
-      marginHorizontal: scale(-16),
-      opacity: 0.3,
-    },
-    privacyTextContainer: {
-      ...Layout.flexRow,
       ...Layout.alignCenter,
+      width: '100%',
+      height: scaleVertical(300),
     },
   });
 
