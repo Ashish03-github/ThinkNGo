@@ -12,7 +12,7 @@ const OTPScreen = () => {
   const styles = React.useMemo(() => stylesFn({ Layout }), [Layout]);
 
   return (
-    <Content withButton isPreAuth={false}>
+    <Content buttonTitle="Verify" withButton isPreAuth={false}>
       <View style={styles.container}>
         <View style={styles.headerWrapper}>
           <OTPHeader />

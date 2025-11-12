@@ -22,6 +22,7 @@ type AppContentProps = {
   headingType?: 'bold' | 'normal';
   screenHeading?: string;
   withButton?: boolean;
+  buttonTitle?: string;
   screenSubHeading?: string;
   disableBackButton?: boolean;
   shouldShowBottomSheet?: boolean;
@@ -38,6 +39,7 @@ type AppContentProps = {
 const AppContent: React.FC<AppContentProps> = ({
   children,
   withButton,
+  buttonTitle = 'Continue',
   screenHeading,
   headingType = 'normal',
   isPreAuth = false,
@@ -165,27 +167,12 @@ const AppContent: React.FC<AppContentProps> = ({
       ) : null}
 
       <View style={styles.childrenContainer}>{children}</View>
-
-      {withButton ? (
-        <View style={styles.buttonContainer}>
-          <Button title="Save Changes" />
-        </View>
-      ) : null}
-
-      {canRenderBottomSheet ? (
-        <View style={styles.buttonContainer}>
-          <Button
-            onPress={handlePresentModalPress}
-            title={bottomSheetTriggerLabel ?? 'Show Details'}
-          />
-        </View>
-      ) : null}
     </KeyboardAwareScrollView>
   );
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={styles.container}>
+    <GestureHandlerRootView style={styles.root}>
+      <SafeAreaView style={styles.container} edges={['top']}>
         <StatusBar
           backgroundColor={Colors.whitePure}
           barStyle={'dark-content'}
@@ -195,7 +182,27 @@ const AppContent: React.FC<AppContentProps> = ({
         <HeaderComponent />
 
         {/* Child */}
-        <ChildComponent />
+        <View style={styles.scrollWrapper}>
+          <ChildComponent />
+        </View>
+
+        {/* Fixed Button at Bottom */}
+        <SafeAreaView edges={['bottom']} style={styles.buttonSafeArea}>
+          {withButton ? (
+            <View style={styles.fixedButtonContainer}>
+              <Button title={buttonTitle} />
+            </View>
+          ) : null}
+
+          {canRenderBottomSheet ? (
+            <View style={styles.fixedButtonContainer}>
+              <Button
+                onPress={handlePresentModalPress}
+                title={bottomSheetTriggerLabel ?? 'Show Details'}
+              />
+            </View>
+          ) : null}
+        </SafeAreaView>
       </SafeAreaView>
 
       {canRenderBottomSheet ? (
@@ -216,10 +223,13 @@ const AppContent: React.FC<AppContentProps> = ({
 
 const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
   StyleSheet.create({
+    root: {
+      flex: 1,
+    },
     container: {
       ...Layout.flex,
       ...Colors.background,
-      // height: '100%',
+      flex: 1,
     },
     headerContainer: {
       ...Spacing.px4,
@@ -227,18 +237,18 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
       ...Spacing.pb3,
       ...Layout.flexRow,
       ...Layout.alignCenter,
-      // backgroundColor: 'pink',
+    },
+    scrollWrapper: {
+      flex: 1,
     },
     scrollContainer: {
       flexGrow: 1,
       ...Spacing.px4,
-      // paddingBottom: scaleVertical(100),
+      paddingBottom: scaleVertical(100),
     },
     screenHeadingContainer: {
       ...Layout.justifyCenter,
       ...Spacing.py5,
-      // ...Spacing.mb4,
-      // backgroundColor: 'yellow',
     },
     screenHeading: {
       ...Fonts.sz20,
@@ -259,6 +269,18 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     buttonContainer: {
       ...Layout.justifyStart,
       ...Spacing.bottom2,
+    },
+    buttonSafeArea: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      ...Colors.background,
+    },
+    fixedButtonContainer: {
+      ...Spacing.px4,
+      ...Spacing.py2,
+      ...Colors.background,
     },
     contentContainer: {
       flex: 1,
