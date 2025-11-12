@@ -135,12 +135,12 @@ const AppContent: React.FC<AppContentProps> = ({
 
   const ChildComponent = () => (
     <KeyboardAwareScrollView
-      enableOnAndroid={true}
-      enableAutomaticScroll={true}
+      enableOnAndroid={false}
+      enableAutomaticScroll={false}
       keyboardShouldPersistTaps="handled"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.scrollContainer}
-      extraScrollHeight={scale(20)}
+      extraScrollHeight={scale(100)}
     >
       {isPreAuth ? (
         <View style={styles.screenHeadingContainer}>
@@ -171,6 +171,7 @@ const AppContent: React.FC<AppContentProps> = ({
           <Button title="Save Changes" />
         </View>
       ) : null}
+
       {canRenderBottomSheet ? (
         <View style={styles.buttonContainer}>
           <Button
@@ -218,6 +219,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     container: {
       ...Layout.flex,
       ...Colors.background,
+      // height: '100%',
     },
     headerContainer: {
       ...Spacing.px4,
@@ -230,7 +232,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     scrollContainer: {
       flexGrow: 1,
       ...Spacing.px4,
-      paddingBottom: scaleVertical(20),
+      // paddingBottom: scaleVertical(100),
     },
     screenHeadingContainer: {
       ...Layout.justifyCenter,

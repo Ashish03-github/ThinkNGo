@@ -14,6 +14,7 @@ const colors = {
         // Text Colors
         textPrimary: { color: "#1F75EC" },
         textSecondary: { color: "#7C7E80" },
+        textRed: { color: "#D64252" },
         textBlack: { color: "#000000" },
         textWhite: { color: "#FFFFFF" },
         textGreen: { color: "#309535" },
@@ -44,6 +45,7 @@ const colors = {
         // Text Colors
         textPrimary: { color: "#000000" },
         textSecondary: { color: "#7C7E80" },
+        textRed: { color: "#D64252" },
         textBlack: { color: "#000000" },
         textWhite: { color: "#FFFFFF" },
         textGreen: { color: "#309535" },

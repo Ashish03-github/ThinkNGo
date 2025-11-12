@@ -1,4 +1,5 @@
 import LoginBackground from '../../source/modules/Auth/Login/assets/LoginBackground';
+import OTP from '../../source/modules/Auth/OTP/assets/OTP';
 import Pagination1 from '../../source/modules/Onboarding/assets/Pagination1';
 import Pagination2 from '../../source/modules/Onboarding/assets/Pagination2';
 import Pagination3 from '../../source/modules/Onboarding/assets/Pagination3';
@@ -25,7 +26,10 @@ export const IconList = {
     pagination3: Pagination3,
 
     // Login
-    loginBackground: LoginBackground
+    loginBackground: LoginBackground,
+
+    // OTP Verification
+    otp: OTP
 } as const;
 
 
