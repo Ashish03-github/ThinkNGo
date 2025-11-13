@@ -10,9 +10,8 @@ import {
 } from './common/components';
 import { RootTheme } from './theme';
 import useTheme from './common/hooks/useTheme';
-import OnBoardingScreen from './modules/Onboarding/screens/OnBoardingScreen';
-import LoginScreen from './modules/Auth/Login/screen/LoginScreen';
 import OTPScreen from './modules/Auth/OTP/screens/OTPScreen';
+import FamilyMemberScreen from './modules/Family/screens/FamilyMemberScreen';
 const App = () => {
   const { Colors, Layout, Spacing, Fonts } = useTheme();
 
@@ -21,7 +20,7 @@ const App = () => {
     [Colors, Layout, Fonts, Spacing],
   );
 
-  return <OTPScreen />;
+  return <FamilyMemberScreen />;
 };
 
 const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>

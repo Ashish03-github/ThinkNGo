@@ -35,6 +35,7 @@ type AppContentProps = {
   bottomSheetEnableBackdropDismiss?: boolean;
   onBottomSheetOpen?: () => void;
   onBottomSheetClose?: () => void;
+  onButtonPress?: () => void;
 };
 const AppContent: React.FC<AppContentProps> = ({
   children,
@@ -53,6 +54,7 @@ const AppContent: React.FC<AppContentProps> = ({
   bottomSheetEnableBackdropDismiss,
   onBottomSheetOpen,
   onBottomSheetClose,
+  onButtonPress,
 }) => {
   const { Colors, Fonts, Layout, Spacing } = useTheme();
 
@@ -190,7 +192,7 @@ const AppContent: React.FC<AppContentProps> = ({
         <SafeAreaView edges={['bottom']} style={styles.buttonSafeArea}>
           {withButton ? (
             <View style={styles.fixedButtonContainer}>
-              <Button title={buttonTitle} />
+              <Button onPress={onButtonPress} title={buttonTitle} />
             </View>
           ) : null}
 
@@ -279,7 +281,7 @@ const stylesFn = ({ Colors, Fonts, Layout, Spacing }: RootTheme) =>
     },
     fixedButtonContainer: {
       ...Spacing.px4,
-      ...Spacing.py2,
+      ...Spacing.py0,
       ...Colors.background,
     },
     contentContainer: {

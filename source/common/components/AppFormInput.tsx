@@ -14,13 +14,14 @@ import Icon from 'react-native-vector-icons/FontAwesome6';
 import { SvgXml } from 'react-native-svg';
 
 interface AppFormInputProps extends TextInputProps {
-  label: string;
+  label?: string;
   subLabel?: string;
   type?:
     | 'Personal-Details-Field'
     | 'Medical-Details-Field'
     | 'Family-Details-Field';
-  placeholder: string;
+  placeholder?: string;
+  isEndField?: boolean;
 }
 
 const AppFormInput: React.FC<AppFormInputProps> = ({
@@ -28,6 +29,7 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
   subLabel,
   type = 'Family-Details-Field',
   placeholder,
+  isEndField = false,
   ...props
 }) => {
   const { Colors, Fonts, Layout, Spacing } = useTheme();
@@ -159,10 +161,10 @@ const AppFormInput: React.FC<AppFormInputProps> = ({
 
   if (type === 'Family-Details-Field') {
     return (
-      <View style={styles.fContainer}>
+      <View style={[styles.fContainer, isEndField && { borderBottomWidth: 0 }]}>
         <View style={styles.fImageIconContainer}>
           <View style={styles.fTempIcon}>
-            <SvgIcon name="user_f" width={'80%'} height={'80%'} />
+            <SvgIcon name="user_f" width={scale(40)} height={scale(40)} />
           </View>
         </View>
         <View style={styles.fDetailsContainer}>

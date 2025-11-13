@@ -1,5 +1,6 @@
 import LoginBackground from '../../source/modules/Auth/Login/assets/LoginBackground';
 import OTP from '../../source/modules/Auth/OTP/assets/OTP';
+import Plus from '../../source/modules/Family/assets/Plus';
 import Pagination1 from '../../source/modules/Onboarding/assets/Pagination1';
 import Pagination2 from '../../source/modules/Onboarding/assets/Pagination2';
 import Pagination3 from '../../source/modules/Onboarding/assets/Pagination3';
@@ -29,7 +30,10 @@ export const IconList = {
     loginBackground: LoginBackground,
 
     // OTP Verification
-    otp: OTP
+    otp: OTP,
+
+    // Family Member
+    plus: Plus,
 } as const;
 
 

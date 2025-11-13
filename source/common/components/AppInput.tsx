@@ -4,6 +4,8 @@ import {
   StyleSheet,
   TextInput,
   TextInputProps,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import React, { FC } from 'react';
 import { scale, scaleVertical } from '../../theme/scale';
@@ -15,15 +17,21 @@ import { SvgIcon } from '.';
 interface InputProps extends TextInputProps {
   isPhone?: boolean;
   isDropdown?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
 }
-const AppInput: FC<InputProps> = ({ isPhone, isDropdown, ...props }) => {
+const AppInput: FC<InputProps> = ({
+  isPhone,
+  isDropdown,
+  containerStyle,
+  ...props
+}) => {
   const { Colors, Fonts, Layout, Spacing } = useTheme();
   let styles = React.useMemo(
     () => stylesFn({ Colors, Layout, Spacing, Fonts }),
     [Colors, Fonts, Layout, Spacing],
   );
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <View style={styles.inputContainer}>
         {isPhone ? (
           <View style={styles.phoneCodeContainer}>

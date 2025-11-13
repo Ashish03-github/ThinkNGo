@@ -20,6 +20,7 @@ const AppButton: React.FC<ButtonProps> = ({
   title = 'Continue',
   icon,
   style,
+  onPress,
   ...touchableProps
 }) => {
   const { Colors, Fonts, Layout, Spacing } = useTheme();
@@ -50,6 +51,7 @@ const AppButton: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity
+      onPress={onPress}
       activeOpacity={0.8}
       style={[isBordered ? styles.borderedContainer : styles.container, style]}
       {...touchableProps}
